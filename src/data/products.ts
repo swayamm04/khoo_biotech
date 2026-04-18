@@ -1,3 +1,4 @@
+import { StaticImageData } from "next/image";
 import fertilizer from "@/assets/product-fertilizer.jpg";
 import pesticide from "@/assets/product-pesticide.jpg";
 import enhancer from "@/assets/product-enhancer.jpg";
@@ -7,7 +8,7 @@ export type Product = {
   slug: string;
   name: string;
   category: string;
-  image: string;
+  image: string | StaticImageData;
   description: string;
 };
 
