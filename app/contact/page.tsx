@@ -27,7 +27,7 @@ export default function ContactPage() {
       <section className="bg-secondary/40 py-16">
         <div className="mx-auto max-w-4xl px-4 text-center md:px-6">
           <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Get in Touch</span>
-          <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-5xl">Let's grow together</h1>
+          <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-5xl">Let&apos;s grow together</h1>
           <p className="mt-3 text-muted-foreground">
             Questions about products, dealerships, or agronomy? Our team usually responds within one business day.
           </p>

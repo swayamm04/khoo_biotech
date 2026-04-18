@@ -1,0 +1,7 @@
+services:
+  - type: static
+    name: khoo-biotech
+    env: static
+    buildCommand: npm install && npm run build
+    publishPath: ./out
+    autoDeploy: true
