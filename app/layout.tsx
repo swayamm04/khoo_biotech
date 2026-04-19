@@ -7,8 +7,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Khoo Biotech — We Serve Humanity | Sustainable Agricultural Solutions",
-  description: "Khoo Biotech Lab develops eco-friendly bio-fertilizers, bio-pesticides, and bio-enhancers for sustainable, high-yield farming.",
+  title: "Kuhoo Biotech — We Serve Humanity | Sustainable Agricultural Solutions",
+  description: "Kuhoo Biotech develops eco-friendly bio-fertilizers, bio-pesticides, and bio-enhancers for sustainable, high-yield farming.",
   icons: {
     icon: "/favicon.png",
   },

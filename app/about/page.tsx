@@ -4,8 +4,8 @@ import { Microscope, Globe2, HeartHandshake, FlaskConical } from "lucide-react";
 import labImg from "@/assets/lab.jpg";
 
 export const metadata: Metadata = {
-  title: "About — Khoo Biotech",
-  description: "Since 2010, Khoo Biotech has built sustainable bio-products through research-driven innovation.",
+  title: "About — Kuhoo Biotech",
+  description: "Since 2022, Kuhoo Biotech has built sustainable bio-products through research-driven innovation.",
 };
 
 const values = [
@@ -24,9 +24,11 @@ export default function AboutPage() {
           <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-5xl">
             Cultivating a healthier planet, one harvest at a time
           </h1>
-          <p className="mt-5 text-lg text-muted-foreground">
-            Founded in 2010, Khoo Biotech Lab is a team of scientists, agronomists and farmers
-            building biological alternatives to conventional agro-chemicals.
+          <p className="mt-5 text-lg text-muted-foreground text-balance mx-auto max-w-3xl">
+            Kuhoo Biotech Private Limited was established in 2022 with a mission to provide cutting-edge organic agricultural inputs. 
+            The company addresses crucial issues faced by Indian farmers—such as declining soil fertility, low crop yield, weed infestation, 
+            and pest attacks—by delivering sustainable, organic solutions that enhance crop health and productivity. Headquartered in Karnataka, 
+            Kuhoo Biotech is on a mission to empower farmers across India with innovative, natural farming inputs that reduce dependency on synthetic chemicals.
           </p>
         </div>
       </section>
@@ -43,9 +45,10 @@ export default function AboutPage() {
         <div>
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Mission &amp; Vision</h2>
           <p className="mt-4 text-muted-foreground">
-            Our mission is to make biological agriculture the new standard — affordable, effective,
-            and good for the soil. We envision a farming future where high yields and ecological
-            health go hand in hand.
+            <strong>Mission:</strong> To empower farmers with eco-friendly agricultural inputs that improve soil fertility, control pests and weeds organically, and increase crop yield—all while ensuring affordability and quality.
+          </p>
+          <p className="mt-4 text-muted-foreground">
+            <strong>Vision:</strong> To revolutionize agriculture by making organic farming more accessible, cost-effective, and productive through innovative technologies and indigenous techniques.
           </p>
           <ul className="mt-6 space-y-3 text-sm">
             <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" /> 50+ proprietary microbial strains in our library.</li>

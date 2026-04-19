@@ -1,9 +1,32 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Leaf, Sprout, Droplets, Award, ArrowRight } from "lucide-react";
+import { 
+  Leaf, 
+  Sprout, 
+  Droplets, 
+  Award, 
+  ArrowRight,
+  Target,
+  ShieldAlert,
+  Bug,
+  Shovel,
+  Info,
+  CheckCircle2,
+  FlaskConical,
+  Trees
+} from "lucide-react";
 import heroField from "@/assets/hero-field.jpg";
 import labImg from "@/assets/lab.jpg";
-import { products, categories } from "@/data/products";
+import { products, categories, Product } from "@/data/products";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const highlights = [
   { icon: Leaf, title: "Eco-Friendly Solutions", body: "Built around environmental sustainability — healthy soil, less chemical dependency." },
@@ -12,7 +35,18 @@ const highlights = [
   { icon: Award, title: "Award-Winning Research", body: "Recognized with multiple awards for sustainable agricultural innovation." },
 ];
 
+const categoryIcons: Record<string, any> = {
+  "biostimulant": Sprout,
+  "crop-specific": Target,
+  "disease-control": ShieldAlert,
+  "bio-pesticide": Bug,
+  "soil-conditioner": Shovel,
+  "adjuvant": Droplets,
+};
+
 export default function Home() {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
   return (
     <>
       {/* Hero */}
@@ -34,8 +68,7 @@ export default function Home() {
               Innovative <span className="text-accent">Eco-Friendly</span> Agricultural Solutions
             </h1>
             <p className="mt-6 text-lg text-primary-foreground/90 md:text-xl">
-              Khoo Biotech Lab develops sustainable products that enhance crop yields while
-              protecting our planet&apos;s precious resources.
+              Kuhoo Biotech Private Limited provides affordable, innovative organic farming solutions to boost soil fertility, crop yield, and pest control for Indian farmers.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -61,7 +94,7 @@ export default function Home() {
           <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Our Impact</span>
           <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Key Highlights</h2>
           <p className="mt-4 text-muted-foreground">
-            What makes Khoo Biotech a leader in sustainable agricultural innovation.
+            What makes Kuhoo Biotech a leader in sustainable agricultural innovation.
           </p>
         </div>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -86,13 +119,13 @@ export default function Home() {
           <div className="relative">
             <Image
               src={labImg}
-              alt="Khoo Biotech laboratory with microscope and plant samples"
+              alt="Kuhoo Biotech laboratory with microscope and plant samples"
               className="relative rounded-3xl shadow-[var(--shadow-soft)]"
               width={1280}
               height={896}
             />
             <div className="absolute -bottom-5 -left-5 rounded-2xl bg-[image:var(--gradient-primary)] px-5 py-3 text-primary-foreground shadow-[var(--shadow-soft)]">
-              <div className="text-2xl font-bold leading-none">Est. 2010</div>
+              <div className="text-2xl font-bold leading-none">Est. 2022</div>
               <div className="text-xs uppercase tracking-widest opacity-90">Innovation since</div>
             </div>
           </div>
@@ -102,7 +135,7 @@ export default function Home() {
               Leading sustainable agriculture innovation
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Khoo Biotech Lab develops eco-friendly solutions for modern farming challenges,
+              Kuhoo Biotech Private Limited develops eco-friendly solutions for modern farming challenges,
               enhancing productivity while preserving ecological balance.
             </p>
             <div className="mt-6 space-y-4">
@@ -137,10 +170,11 @@ export default function Home() {
           </Link>
         </div>
         <div className="mt-10 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {products.slice(0, 10).map((p) => (
+          {products.slice(0, 5).map((p) => (
             <article
               key={p.slug}
-              className="group overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:border-primary/40"
+              onClick={() => setSelectedProduct(p)}
+              className="group cursor-pointer overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:border-primary/40"
             >
               <div className="aspect-square overflow-hidden bg-secondary/40 relative">
                 <Image
@@ -151,8 +185,11 @@ export default function Home() {
                 />
               </div>
               <div className="p-3">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-primary">{p.category}</span>
-                <h3 className="mt-0.5 text-sm font-bold line-clamp-1">{p.name}</h3>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-primary">{p.category}</span>
+                  {p.volume && <span className="text-[9px] font-medium text-muted-foreground">{p.volume}</span>}
+                </div>
+                <h3 className="mt-0.5 text-sm font-bold line-clamp-1 group-hover:text-primary transition-colors">{p.name}</h3>
                 <p className="mt-1 line-clamp-2 text-[11px] leading-tight text-muted-foreground">{p.description}</p>
               </div>
             </article>
@@ -169,22 +206,25 @@ export default function Home() {
               Comprehensive eco-friendly agricultural solutions for sustainable farming.
             </p>
           </div>
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {categories.map((c) => (
-              <div
-                key={c.slug}
-                className="rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition hover:border-primary/50"
-              >
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[image:var(--gradient-primary)] text-primary-foreground">
-                  <Leaf className="h-5 w-5" />
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {categories.map((c) => {
+              const Icon = categoryIcons[c.slug] || Sprout;
+              return (
+                <div
+                  key={c.slug}
+                  className="group rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition hover:border-primary/50"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-secondary text-primary transition-colors group-hover:bg-[image:var(--gradient-primary)] group-hover:text-primary-foreground mb-4">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-lg font-bold">{c.name}</h3>
+                  <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+                  <Link href="/products" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+                    Discover Products <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
-                <h3 className="mt-4 text-lg font-bold">{c.name}</h3>
-                <p className="mt-1.5 text-sm text-muted-foreground">{c.desc}</p>
-                <Link href="/products" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
-                  Discover Products <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -204,6 +244,96 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      {/* Product Detail Modal */}
+      <Dialog open={!!selectedProduct} onOpenChange={(open) => !open && setSelectedProduct(null)}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden border-none shadow-[0_0_50px_rgba(0,0,0,0.15)] rounded-3xl">
+          {selectedProduct && (
+            <div className="grid md:grid-cols-2">
+              <div className="relative aspect-square md:aspect-auto bg-secondary/20">
+                <Image
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-8 md:p-10 max-h-[80vh] overflow-y-auto custom-scrollbar bg-card">
+                <DialogHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="rounded-full bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary">
+                      {selectedProduct.category}
+                    </span>
+                    {selectedProduct.volume && (
+                      <span className="text-xs font-medium text-muted-foreground bg-secondary px-2.5 py-0.5 rounded-full">
+                        {selectedProduct.volume}
+                      </span>
+                    )}
+                  </div>
+                  <DialogTitle className="text-2xl font-bold tracking-tight">{selectedProduct.name}</DialogTitle>
+                </DialogHeader>
+
+                <div className="mt-6 space-y-8">
+                  <div>
+                    <h4 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">
+                      <Info className="h-4 w-4 text-primary" /> Overview
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed">{selectedProduct.description}</p>
+                  </div>
+
+                  {selectedProduct.benefits && (
+                    <div>
+                      <h4 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-muted-foreground mb-4">
+                        <CheckCircle2 className="h-4 w-4 text-primary" /> Key Benefits
+                      </h4>
+                      <ul className="grid gap-3">
+                        {selectedProduct.benefits.map((b, i) => (
+                          <li key={i} className="flex gap-3 text-sm text-balance">
+                            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                            <span className="text-muted-foreground">{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    {selectedProduct.composition && (
+                      <div>
+                        <h4 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">
+                          <FlaskConical className="h-4 w-4 text-primary" /> Composition
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedProduct.composition.map((c, i) => (
+                            <span key={i} className="text-xs bg-secondary/50 px-2 py-1 rounded-md text-muted-foreground">
+                              {c}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {selectedProduct.crop && (
+                      <div>
+                        <h4 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">
+                          <Trees className="h-4 w-4 text-primary" /> Recommended Crop
+                        </h4>
+                        <span className="text-sm font-semibold">{selectedProduct.crop}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {selectedProduct.usage && (
+                    <div className="rounded-2xl bg-primary/5 p-5 border border-primary/10">
+                      <h4 className="text-xs font-bold uppercase tracking-widest text-primary mb-2">How to Use</h4>
+                      <p className="text-sm text-primary/80 font-medium">{selectedProduct.usage}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

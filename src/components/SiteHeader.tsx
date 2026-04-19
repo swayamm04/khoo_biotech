@@ -29,7 +29,7 @@ export function SiteHeader() {
           <div className="flex items-center gap-3">
             <Image
               src="/logo.png"
-              alt="Khoo Biotech Logo"
+              alt="Kuhoo Biotech Logo"
               width={240}
               height={64}
               className="h-14 w-auto"
@@ -55,7 +55,7 @@ export function SiteHeader() {
         <Link href="/" className="flex items-center gap-3 group">
           <Image
             src="/logo.png"
-            alt="Khoo Biotech Logo"
+            alt="Kuhoo Biotech Logo"
             width={240}
             height={64}
             className="h-14 w-auto"

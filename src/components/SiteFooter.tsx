@@ -20,7 +20,7 @@ export function SiteFooter() {
             <div className="flex items-center gap-3">
               <Image
                 src="/logo.png"
-                alt="Khoo Biotech Logo"
+                alt="Kuhoo Biotech Logo"
                 width={180}
                 height={48}
                 className="h-12 w-auto"
@@ -39,7 +39,7 @@ export function SiteFooter() {
           <div className="flex items-center gap-3">
             <Image
               src="/logo.png"
-              alt="Khoo Biotech Logo"
+              alt="Kuhoo Biotech Logo"
               width={180}
               height={48}
               className="h-12 w-auto"
@@ -73,14 +73,14 @@ export function SiteFooter() {
         <div>
           <h4 className="mb-3 text-sm font-semibold">Contact</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 text-primary" /> Bengaluru, Karnataka, India</li>
-            <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /> hello@greenlife.example</li>
-            <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> +91 00000 00000</li>
+            <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" /> <span className="leading-tight">2078/2078/RC-23, Near JCB Showroom. Kalluru Mandli Industrial Area, Haiholeroad, Shivamogga - 577202, Karnataka, India</span></li>
+            <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary shrink-0" /> kuhoobiotech@yahoo.com</li>
+            <li className="flex items-start gap-2"><Phone className="h-4 w-4 mt-0.5 text-primary shrink-0" /> <span className="leading-tight">+91 6360104990, +91 8275092436</span></li>
           </ul>
         </div>
       </div>
       <div className="border-t border-border py-5 text-center text-xs text-muted-foreground" suppressHydrationWarning>
-        © {new Date().getFullYear()} Khoo Biotech. All rights reserved.
+        © {new Date().getFullYear()} Kuhoo Biotech Private Limited. All rights reserved.
       </div>
     </footer>
   );
